@@ -1,4 +1,4 @@
-oad("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
 http_archive(
     name = "aspect_rules_js",
@@ -28,7 +28,7 @@ load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
 npm_translate_lock(
     name = "npm",
     pnpm_lock = "//:pnpm-lock.yaml",
-    verify_node_modules_ignored = "//:.bazelignore",
+    #verify_node_modules_ignored = "//:.bazelignore",
 )
 
 load("@npm//:repositories.bzl", "npm_repositories")
