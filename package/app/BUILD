@@ -1,6 +1,6 @@
 load("@npm//:defs.bzl", "npm_link_all_packages")
-load("@aspect_rules_js//js:defs.bzl", "js_binary")
-load("@npm//:vite/package_json.bzl", vite_bin = "bin")
+load("@aspect_rules_js//js:defs.bzl", "js_binary", "js_run_devserver")
+load("@npm//package/app:vite/package_json.bzl", vite_bin = "bin")
 
 package(default_visibility = ["//visibility:public"])
 
@@ -24,8 +24,13 @@ vite_bin.vite(
 )
 
 vite_bin.vite_binary(
-    name = "dev",
-    args = [],
+    name = "devserver",
     chdir = package_name(),
-    data = SRCS + DEPS
+)
+
+js_run_devserver(
+    name = "dev",
+    tool = ":devserver",
+    data = SRCS + DEPS,
+    args = [],
 )

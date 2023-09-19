@@ -1,12 +1,13 @@
 {
-	"name": "b",
+	"name": "@surma/app",
 	"version": "0.0.1",
 	"description": "",
 	"type": "module",
 	"main": "main.js",
 	"dependencies": {
 		"@surma/ts": "workspace:*",
-		"@surma/vanilla_js": "workspace:*"
+		"@surma/vanilla_js": "workspace:*",
+		"vite": "^4.4.9"
 	},
 	"keywords": [],
 	"author": "Surma <surma@surma.dev>",
