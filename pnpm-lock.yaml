@@ -1,9 +1,20 @@
 lockfileVersion: '6.0'
 
-dependencies:
-  lodash:
-    specifier: ^4.17.21
-    version: 4.17.21
+importers:
+
+  .: {}
+
+  package/a:
+    dependencies:
+      lodash:
+        specifier: ^4.17.21
+        version: 4.17.21
+
+  package/b:
+    dependencies:
+      '@surmtest/a':
+        specifier: workspace:*
+        version: link:../a
 
 packages:
 

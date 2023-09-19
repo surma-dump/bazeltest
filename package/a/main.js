@@ -1,8 +1,9 @@
-import {sum} from "lodash";
+import _ from "lodash";
+
 export function a() {
 	let a = [4];
 	if(false) {
 		a.push(5)
 	}
-	return sum(a);
+	return _.sum(a);
 }

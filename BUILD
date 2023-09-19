@@ -1,10 +1,3 @@
-# load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
-load("@aspect_rules_js//js:defs.bzl", "js_library")
+load("@npm//:defs.bzl", "npm_link_all_packages")
 
-js_library(
-    name = "a",
-    srcs = [
-        "main.js",
-        "package.json"
-    ],
-)
+npm_link_all_packages(name = "node_modules")

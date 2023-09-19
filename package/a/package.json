@@ -1,0 +1,12 @@
+{
+  "name": "@surmtest/a",
+  "version": "0.0.1",
+  "description": "",
+  "main": "main.js",
+  "type": "module",
+  "author": "Surma <surma@surma.dev>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
