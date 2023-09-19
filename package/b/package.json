@@ -1,0 +1,14 @@
+{
+  "name": "b",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "main.js",
+  "dependencies": {
+    "surm_a": "workspace:*",
+    "@surma/c": "workspace:*"
+  },
+  "keywords": [],
+  "author": "Surma <surma@surma.dev>",
+  "license": "Apache-2.0"
+}

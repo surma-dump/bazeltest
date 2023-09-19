@@ -1,5 +1,5 @@
-import {a} from "../a/main.js";
-import {c} from "../c/main.js";
-
+import {a} from "surm_a";
 console.log(a());
+
+import {c} from "@surma/c";
 console.log(c("ASDAS"));

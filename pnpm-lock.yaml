@@ -11,17 +11,18 @@ importers:
         specifier: 5.2.2
         version: 5.2.2
 
-  package/a:
-    dependencies:
-      lodash:
-        specifier: ^4.17.21
-        version: 4.17.21
+  package/a: {}
 
   package/b:
     dependencies:
-      '@surmtest/a':
+      '@surma/c':
+        specifier: workspace:*
+        version: link:../c
+      surm_a:
         specifier: workspace:*
         version: link:../a
+
+  package/c: {}
 
 packages:
 
