@@ -4,6 +4,8 @@ load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
 
 package(default_visibility = ["//visibility:public"])
 
+# npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
+
 ts_config(
     name = "ts_config",
     src = ":tsconfig.json"

@@ -5,8 +5,8 @@
 	"type": "module",
 	"main": "main.js",
 	"dependencies": {
-		"@surma/vanilla_js": "workspace:*",
-		"@surma/ts": "workspace:*"
+		"@surma/ts": "workspace:*",
+		"@surma/vanilla_js": "workspace:*"
 	},
 	"keywords": [],
 	"author": "Surma <surma@surma.dev>",
