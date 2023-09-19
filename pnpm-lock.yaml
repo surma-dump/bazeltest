@@ -1,7 +1,6 @@
-lockfileVersion: '6.0'
+lockfileVersion: "6.0"
 
 importers:
-
   .:
     dependencies:
       lodash:
@@ -11,27 +10,32 @@ importers:
         specifier: 5.2.2
         version: 5.2.2
 
-  package/a: {}
-
-  package/b:
+  package/app:
     dependencies:
-      '@surma/c':
+      "@surma/ts":
         specifier: workspace:*
-        version: link:../c
-      surm_a:
+        version: link:../ts
+      "@surma/vanilla_js":
         specifier: workspace:*
-        version: link:../a
+        version: link:../vanilla_js
 
-  package/c: {}
+  package/ts: {}
+
+  package/vanilla_js: {}
 
 packages:
-
   /lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+    resolution:
+      {
+        integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==,
+      }
     dev: false
 
   /typescript@5.2.2:
-    resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
-    engines: {node: '>=14.17'}
+    resolution:
+      {
+        integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==,
+      }
+    engines: { node: ">=14.17" }
     hasBin: true
     dev: false

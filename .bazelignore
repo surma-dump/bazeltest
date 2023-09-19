@@ -1,4 +1,4 @@
 node_modules
-package/a/node_modules
-package/b/node_modules
-package/c/node_modules
+package/vanilla_js/node_modules
+package/ts/node_modules
+package/app/node_modules

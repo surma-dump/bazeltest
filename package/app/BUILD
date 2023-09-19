@@ -6,10 +6,10 @@ package(default_visibility = ["//visibility:public"])
 npm_link_all_packages(name = "node_modules")
 
 js_binary(
-    name = "b",
+    name = "app",
     data = [
-        ":node_modules/surm_a", 
-        ":node_modules/@surma/c"
+        ":node_modules/@surma/vanilla_js", 
+        ":node_modules/@surma/ts"
     ],
     entry_point = "main.js",
 )
