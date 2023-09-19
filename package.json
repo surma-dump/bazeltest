@@ -8,5 +8,8 @@
   },
   "keywords": [],
   "author": "Surma <surma@surma.dev>",
-  "license": "Apache-2.0"
+  "license": "Apache-2.0",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
 }

@@ -1,3 +1,3 @@
-import {a} from "@surmtest/a";
+import {a} from "../a/main.js";
 
 console.log(a());

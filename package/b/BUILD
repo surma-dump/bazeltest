@@ -1,49 +1,7 @@
-load("@aspect_rules_js//npm:defs.bzl", "npm_package", "stamped_package_json")
-load("@aspect_rules_js//js:defs.bzl", "js_library", "js_binary")
-load("@npm//:defs.bzl", "npm_link_all_packages")
-
-npm_link_all_packages(name = "node_modules")
-
-stamped_package_json(
-    name = "package",
-    # This key is defined by /workspace_status.sh
-    stamp_var = "STABLE_BUILD_VERSION",
-)
-
-# Use js_library so that npm_package picks up our transitive sources from deps
-# via the JsInfo provider.
-# js_library(
-#     name = "lib",
-#     srcs = [
-#         "main.js",
-#         ":package",
-#     ],
-#     # In this package, the npm dependencies needed for consumers as specified
-#     # in its 'package.json' file so they don't need to be explicitly set as deps
-#     # of this 'js_library' for the linker to link the as depenencies of the 'npm_package'
-#     # since it is linked via 'npm_link_all_packages'.
-#     deps = [
-#         "//package/a:lib",
-#     ],
-# )
+load("@aspect_rules_js//js:defs.bzl", "js_binary")
 
 js_binary(
     name="b",
-    data = [":node_modules/@surmtest/a"],
+    data = ["//package/a"],
     entry_point = "main.js",
 )
-# The terminal npm_package target for this package. This target is linked from
-# information encoded in the 'pnpm-lock.yaml' file via pnpm workspaces (https://pnpm.io/workspaces).
-# These are defined in root 'pnpm-workspace.yaml'. The 'npm_translate_lock' repository
-# rule encodes the linking logic for this dependency into the generated 'npm_link_all_packages'
-# marco.
-# npm_package(
-#     name = "b",
-#     srcs = [":lib"],
-#     # The package name does not need to be specified in this target since the name
-#     # that this package is linked as is set by the pnpm lockfile. If it is
-#     # specified here then it won't be load bearing since the value in the pnpm
-#     # lockfile will take precedence.
-#     include_runfiles = False,
-#     visibility = ["//visibility:public"],
-# )
