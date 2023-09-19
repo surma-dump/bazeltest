@@ -4,18 +4,28 @@ load("@npm//:vite/package_json.bzl", vite_bin = "bin")
 
 package(default_visibility = ["//visibility:public"])
 
-
 npm_link_all_packages(name = "node_modules")
+
+SRCS = glob(["src/**"]) + [
+    "index.html"
+]
+
+DEPS = [":node_modules/" + d for d in [
+        "@surma/vanilla_js",
+        "@surma/ts"
+]]
 
 vite_bin.vite(
     name = "app",
     args = ["build"],
     out_dirs = ["dist"],
     chdir = package_name(),
-    srcs = [
-        "index.html",
-        "src/main.js",
-        ":node_modules/@surma/vanilla_js", 
-        ":node_modules/@surma/ts"
-    ],
+    srcs = SRCS + DEPS,
+)
+
+vite_bin.vite_binary(
+    name = "dev",
+    args = [],
+    chdir = package_name(),
+    data = SRCS + DEPS
 )
