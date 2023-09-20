@@ -1,5 +1,5 @@
 {
-  "name": "bazeltest",
+  "name": "greet",
   "type": "module",
   "author": "Surma <surma@surma.dev>",
   "license": "Apache-2.0",
