@@ -7,13 +7,15 @@ package(default_visibility = ["//visibility:public"])
 npm_link_all_packages(name = "node_modules")
 
 SRCS = glob(["src/**"]) + [
-    "index.html"
+    "index.html",
+    "vite.config.js",
 ]
 
 DEPS = [":node_modules/" + d for d in [
         "@surma/vanilla_js",
-        "@surma/ts"
-]]
+        "@surma/ts",
+        "vite"
+    ]]
 
 vite_bin.vite(
     name = "app",
@@ -24,13 +26,8 @@ vite_bin.vite(
 )
 
 vite_bin.vite_binary(
-    name = "devserver",
+    name = "dev",
     chdir = package_name(),
+    data = SRCS + DEPS,
 )
 
-js_run_devserver(
-    name = "dev",
-    tool = ":devserver",
-    data = SRCS + DEPS,
-    args = [],
-)

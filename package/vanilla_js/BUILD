@@ -9,10 +9,10 @@ npm_link_all_packages(name = "node_modules")
 js_library(
     name = "lib",
     srcs = [
-        "main.js",
+        "main.js"
     ],
     deps = [
-        "//:node_modules/lodash"
+        "//:node_modules/lodash-es"
     ]
 )
 
@@ -22,5 +22,5 @@ npm_package(
     # that this package is linked as is set by the pnpm lockfile. If it is
     # specified here then it won't be load bearing since the value in the pnpm
     # lockfile will take precedence.
-    srcs = [":lib", "package.json"]
+    srcs = [":lib", "package.json"],
 )
