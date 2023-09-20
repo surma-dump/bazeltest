@@ -5,6 +5,7 @@ import { dirname } from "node:path";
 export default defineConfig({
 	clearScreen: false,
 	optimizeDeps: {
-		disabled: true,
+		// This works around the fact that we have our own code
+		force: true,
 	},
 });
