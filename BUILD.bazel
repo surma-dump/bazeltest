@@ -1,14 +1,14 @@
-load("@aspect_rules_js//js:defs.bzl", "js_library")
 load("@npm//:defs.bzl", "npm_link_all_packages")
 load("@aspect_rules_ts//ts:defs.bzl", "ts_config")
 load("@aspect_bazel_lib//lib:copy_to_bin.bzl", "copy_to_bin")
-load("@bazel_gazelle//:def.bzl", "gazelle", "gazelle_binary")
 
 package(default_visibility = ["//visibility:public"])
 
+# npm = use_extension("@aspect_rules_js//npm:extensions.bzl", "npm", dev_dependency = True)
+
 ts_config(
     name = "ts_config",
-    src = ":tsconfig.json",
+    src = ":tsconfig.json"
 )
 
 npm_link_all_packages(name = "node_modules")
@@ -16,21 +16,4 @@ npm_link_all_packages(name = "node_modules")
 copy_to_bin(
     name = "swcrc",
     srcs = [":.swcrc"],
-)
-
-gazelle(
-    name = "gazelle",
-    gazelle = ":gazelle_js",
-)
-
-gazelle_binary(
-    name = "gazelle_js",
-    languages = [
-        "@com_github_benchsci_rules_nodejs_gazelle//gazelle",
-    ],
-)
-
-js_library(
-    name = "package_json",
-    srcs = ["package.json"],
 )
