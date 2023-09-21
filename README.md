@@ -1,3 +1,11 @@
+### Install Bazel
+
+```
+brew install bazelisk
+```
+
+... or get a binary or something. Check the [Bazel website](https://bazel.build)
+
 ### Build
 
 ```
