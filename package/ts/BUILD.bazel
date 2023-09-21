@@ -9,22 +9,24 @@ package(default_visibility = ["//visibility:public"])
 
 npm_link_all_packages(name = "node_modules")
 
-ts_project(
-    name = "lib",
-    srcs = ["main.ts"],
-    tsconfig = "//:ts_config",
-    declaration = True,
-    transpiler = partial.make(
-        swc,
-        swcrc = "//:swcrc",
-    )
-)
-
 npm_package(
     name = "ts",
     # The package name does not need to be specified in this target since the name
     # that this package is linked as is set by the pnpm lockfile. If it is
     # specified here then it won't be load bearing since the value in the pnpm
     # lockfile will take precedence.
-    srcs = [":lib", "package.json"]
+    srcs = [
+        "package.json",
+        ":lib",
+    ],
+)
+
+js_library(
+    name = "package_json",
+    srcs = ["package.json"],
+)
+
+ts_project(
+    name = "main",
+    srcs = ["main.ts"],
 )
