@@ -1,6 +1,7 @@
 genrule(
 	name = "p1",
 	srcs = ["run.sh"],
-	outs = ["code.json", "lol.txt"],
-	cmd = "$(location run.sh) $(RULEDIR)",
+	outs = ["env.txt", "tree.txt"],
+	cmd = "$(location :run.sh) $(RULEDIR) $< $(location :run.sh)",
+
 )

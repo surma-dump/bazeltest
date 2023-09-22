@@ -2,15 +2,8 @@
 
 set -e -o pipefail
 
-cd $1
-cat > code.json << EOF
-{
-	"hello": "world"
-}
-EOF
-
-echo @ = $@ > lol.txt
-echo OUTS = $OUTS >> lol.txt
-echo PATH = $PATH >> lol.txt
-echo PWD = $PWD >> lol.txt
-echo TMPDIR = $TMPDIR >> lol.txt
+env > $1/env.txt
+echo \$\< = $2 >> $1/env.txt
+echo location run.sh = $3 >> $1/env.txt
+echo \$RULEDIR = $1 >> $1/env.txt
+tree -l > $1/tree.txt
