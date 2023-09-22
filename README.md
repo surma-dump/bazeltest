@@ -13,6 +13,7 @@ bazel build //package/app
 ```
 
 ### Dev
+
 ```
 bazel run //package/app:dev
 
@@ -31,5 +32,3 @@ bazel build --remote_upload_local_results=false --remote_cache=http://localhost:
 ```
 
 I used [bazel-remote](https://github.com/buchgr/bazel-remote) as a quick cache server.
-
-
