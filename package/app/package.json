@@ -7,6 +7,7 @@
 	"dependencies": {
 		"@surma/ts": "workspace:*",
 		"@surma/vanilla_js": "workspace:*",
+		"@surma/js_with_deps": "workspace:*",
 		"vite": "^4.4.9"
 	},
 	"keywords": [],

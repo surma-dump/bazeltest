@@ -2,3 +2,4 @@ node_modules
 package/vanilla_js/node_modules
 package/ts/node_modules
 package/app/node_modules
+package/js_with_deps/node_modules

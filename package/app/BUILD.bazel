@@ -12,6 +12,7 @@ SRCS = glob(["src/**"]) + [
 ]
 
 DEPS = [":node_modules/" + d for d in [
+        "@surma/js_with_deps",
         "@surma/vanilla_js",
         "@surma/ts",
         "vite"

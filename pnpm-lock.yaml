@@ -12,6 +12,9 @@ importers:
 
   package/app:
     dependencies:
+      "@surma/js_with_deps":
+        specifier: workspace:*
+        version: link:../js_with_deps
       "@surma/ts":
         specifier: workspace:*
         version: link:../ts
@@ -21,6 +24,12 @@ importers:
       vite:
         specifier: ^4.4.9
         version: 4.4.9
+
+  package/js_with_deps:
+    dependencies:
+      preact:
+        specifier: ^10.17.1
+        version: 10.17.1
 
   package/ts: {}
 
@@ -368,6 +377,13 @@ packages:
       nanoid: 3.3.6
       picocolors: 1.0.0
       source-map-js: 1.0.2
+    dev: false
+
+  /preact@10.17.1:
+    resolution:
+      {
+        integrity: sha512-X9BODrvQ4Ekwv9GURm9AKAGaomqXmip7NQTZgY7gcNmr7XE83adOMJvd3N42id1tMFU7ojiynRsYnY6/BRFxLA==,
+      }
     dev: false
 
   /rollup@3.29.2:
