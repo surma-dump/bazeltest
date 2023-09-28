@@ -1,0 +1,15 @@
+filegroup(
+	name = "merge",
+	srcs = [
+		"//mergetest/a",
+		"//mergetest/b"
+	],
+)
+genrule(
+	name = "c",
+	srcs = [
+		":merge"
+	],
+	cmd = "tree | tee $(location tree.txt)",
+	outs = ["tree.txt"]
+)
