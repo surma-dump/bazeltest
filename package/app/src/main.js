@@ -1,2 +1,2 @@
 import * as preact from "preact";
-console.log(process.version, typeof preact.Component);
+console.log(process.version, typeof preact.Component, preact.Component.name);

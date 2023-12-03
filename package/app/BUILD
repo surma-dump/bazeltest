@@ -1,5 +1,5 @@
 genrule(
-    name = "node_modules_dir",
+    name = "node_modules_tar",
     srcs = [
         "package.json",
         "package-lock.json"
@@ -7,12 +7,14 @@ genrule(
     tools = [
         "@nodejs_host//:npm"
     ],
-    outs = ["node_modules"],
+    outs = ["node_modules.tar"],
     cmd = """
         NPM=$$(readlink -f $(location @nodejs_host//:npm))
-        cd package/app
-        mv node_modules $(location :node_modules_dir)
+        OUT=$$(echo $$PWD/$(location :node_modules.tar))
+        PKGDIR=$$(dirname $$PWD/$(location :package.json))
+        cd $$PKGDIR
         $$NPM ci
+        tar -cf $$OUT node_modules
     """,
 )
 
@@ -23,10 +25,15 @@ genrule(
     ],
     srcs = [
         "src/main.js",
-        ":node_modules_dir"
+        "package.json",
+        ":node_modules_tar"
     ],
     outs = ["version.txt"],
     cmd = """
-        $(location @nodejs_host//:node) $(location :src/main.js) > version.txt
+        NODE=$$(readlink -f $(location @nodejs_host//:node))
+        PKGDIR=$$(dirname $$PWD/$(location :package.json))
+        OUT=$$(echo $$PWD/$(location :version.txt))
+        tar -xf $(location :node_modules_tar)
+        $(location @nodejs_host//:node) $(location :src/main.js) > $(location :version.txt)
     """,
 )
