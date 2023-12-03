@@ -5,9 +5,7 @@
 	"type": "module",
 	"main": "main.js",
 	"dependencies": {
-		"@surma/ts": "workspace:*",
-		"@surma/vanilla_js": "workspace:*",
-		"vite": "^4.4.9"
+		"preact": "^10.19.2"
 	},
 	"keywords": [],
 	"author": "Surma <surma@surma.dev>",

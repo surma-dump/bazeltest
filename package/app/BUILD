@@ -1,33 +1,32 @@
-load("@npm//:defs.bzl", "npm_link_all_packages")
-load("@aspect_rules_js//js:defs.bzl", "js_binary", "js_run_devserver")
-load("@npm//package/app:vite/package_json.bzl", vite_bin = "bin")
+genrule(
+    name = "node_modules_dir",
+    srcs = [
+        "package.json",
+        "package-lock.json"
+    ],
+    tools = [
+        "@nodejs_host//:npm"
+    ],
+    outs = ["node_modules"],
+    cmd = """
+        NPM=$$(readlink -f $(location @nodejs_host//:npm))
+        cd package/app
+        mv node_modules $(location :node_modules_dir)
+        $$NPM ci
+    """,
+)
 
-package(default_visibility = ["//visibility:public"])
-
-npm_link_all_packages(name = "node_modules")
-
-SRCS = glob(["src/**"]) + [
-    "index.html",
-    "vite.config.js",
-]
-
-DEPS = [":node_modules/" + d for d in [
-        "@surma/vanilla_js",
-        "@surma/ts",
-        "vite"
-    ]]
-
-vite_bin.vite(
+genrule(
     name = "app",
-    args = ["build"],
-    out_dirs = ["dist"],
-    chdir = package_name(),
-    srcs = SRCS + DEPS,
+    tools = [
+        "@nodejs_host//:node"
+    ],
+    srcs = [
+        "src/main.js",
+        ":node_modules_dir"
+    ],
+    outs = ["version.txt"],
+    cmd = """
+        $(location @nodejs_host//:node) $(location :src/main.js) > version.txt
+    """,
 )
-
-vite_bin.vite_binary(
-    name = "dev",
-    chdir = package_name(),
-    data = SRCS + DEPS,
-)
-
