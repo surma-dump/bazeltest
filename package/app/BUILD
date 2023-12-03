@@ -11,7 +11,7 @@ genrule(
     cmd = """
         NPM=$$(readlink -f $(location @nodejs_host//:npm))
         OUT=$$(echo $$PWD/$(location :node_modules.tar))
-        PKGDIR=$$(dirname $$PWD/$(location :package.json))
+        PKGDIR=$$(dirname $$(echo $$PWD/$(location :package.json)))
         cd $$PKGDIR
         $$NPM ci
         tar -cf $$OUT node_modules
@@ -31,9 +31,11 @@ genrule(
     outs = ["version.txt"],
     cmd = """
         NODE=$$(readlink -f $(location @nodejs_host//:node))
-        PKGDIR=$$(dirname $$PWD/$(location :package.json))
+        PKGDIR=$$(dirname $$(echo $$PWD/$(location :package.json)))
+        TAR=$$(readlink -f $(location :node_modules_tar))
         OUT=$$(echo $$PWD/$(location :version.txt))
+        cd $$PKGDIR
         tar -xf $(location :node_modules_tar)
-        $(location @nodejs_host//:node) $(location :src/main.js) > $(location :version.txt)
+        $(location @nodejs_host//:node) $(location :src/main.js) > $$OUT
     """,
 )
