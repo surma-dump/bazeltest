@@ -11,18 +11,3 @@ run_js_binary(
     args = ["$${EXECROOT}/$(location :version.txt)"],
     node_modules = ":node_modules",
 )
-# genrule(
-#     name = "app",
-#     tools = [
-#         "@nodejs_host//:node"
-#     ],
-#     cmd = """
-#         NODE=$$(readlink -f $(location @nodejs_host//:node))
-#         PKGDIR=$$(dirname $$(echo $$PWD/$(location :package.json)))
-#         TAR=$$(readlink -f $(location :node_modules_tar))
-#         OUT=$$(echo $$PWD/$(location :version.txt))
-#         cd $$PKGDIR
-#         tar -xf $(location :node_modules_tar)
-#         $(location @nodejs_host//:node) $(location :src/main.js) > $$OUT
-#     """,
-# )

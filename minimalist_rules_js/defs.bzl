@@ -21,11 +21,11 @@ def npm_link_all_packages(
         srcs = [
             ":package_json_bin",
             ":package_lock_json_bin",
-            "//minimalist_rules_js:node_wrapper",
+            "//minimalist_rules_js:prepare_env",
             "@nodejs_host//:npm",
         ],
         args = [
-            "$(location //minimalist_rules_js:node_wrapper)",
+            "$(location //minimalist_rules_js:prepare_env)",
             "$${EXECROOT}/$(location @nodejs_host//:npm)",
             "ci",
         ],
@@ -55,13 +55,13 @@ def run_js_binary(
         srcs = [
             package_json,
             node_modules,
-            "//minimalist_rules_js:node_wrapper",
+            "//minimalist_rules_js:prepare_env",
             ":package_json_bin",
             "@nodejs_host//:node",
         ] + data + [src],
         outs = outs,
         args = [
-            "$(location //minimalist_rules_js:node_wrapper)",
+            "$(location //minimalist_rules_js:prepare_env)",
             "$${EXECROOT}/$(location @nodejs_host//:node)",
             "--preserve-symlinks-main",
             "$${EXECROOT}/$(location %s)" % src,
