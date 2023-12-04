@@ -1,13 +1,7 @@
 {
 	"name": "@surma/app",
-	"version": "0.0.1",
-	"description": "",
 	"type": "module",
-	"main": "main.js",
 	"dependencies": {
 		"preact": "^10.19.2"
-	},
-	"keywords": [],
-	"author": "Surma <surma@surma.dev>",
-	"license": "Apache-2.0"
+	}
 }

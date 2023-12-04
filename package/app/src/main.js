@@ -1,2 +1,12 @@
+import * as fs from "node:fs";
 import * as preact from "preact";
-console.log(process.version, typeof preact.Component, preact.Component.name);
+
+const args = process.argv.slice(2);
+
+fs.writeFileSync(
+  args[0],
+  JSON.stringify({
+    v: process.version, 
+    c: preact.Component.name
+  }, null, 2)
+);
