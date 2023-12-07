@@ -9,11 +9,11 @@ npm_link_all_packages(name = "node_modules")
 
 esbuild(
     name = "bundle",
-    srcs = glob(["**/*.jsx", "**/*.js"]),
-    config = "esbuild.config.mjs",
+    srcs = glob(["**/*.jsx", "**/*.js"]) + [ "//:esbuild_graphql_plugin"],
     data = [
         ":node_modules/preact",
     ],
+    config = "esbuild.config.mjs",
     entry_point = "main.jsx",
     output = "bundle.js",
 )

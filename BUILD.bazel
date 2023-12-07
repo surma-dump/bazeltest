@@ -6,12 +6,17 @@ package(default_visibility = ["//visibility:public"])
 
 ts_config(
     name = "ts_config",
-    src = ":tsconfig.json",
+    src = "tsconfig.json",
 )
 
 npm_link_all_packages(name = "node_modules")
 
 copy_to_bin(
     name = "swcrc",
-    srcs = [":.swcrc"],
+    srcs = [".swcrc"],
+)
+
+copy_to_bin(
+    name = "esbuild_graphql_plugin",
+    srcs = ["esbuild-graphql-plugin.mjs"]
 )
