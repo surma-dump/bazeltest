@@ -3,6 +3,7 @@
 	"author": "Surma <surma@surma.dev>",
 	"license": "Apache-2.0",
 	"dependencies": {
+		"@bazel/bazelisk": "^1.19.0",
 		"lodash-es": "^4.17.21",
 		"typescript": "5.2.2"
 	}

@@ -12,12 +12,12 @@ npm_link_all_packages(name = "node_modules")
 ts_project(
     name = "lib",
     srcs = ["main.ts"],
-    tsconfig = "//:ts_config",
     declaration = True,
     transpiler = partial.make(
         swc,
         swcrc = "//:swcrc",
-    )
+    ),
+    tsconfig = "//:ts_config",
 )
 
 npm_package(
@@ -26,5 +26,8 @@ npm_package(
     # that this package is linked as is set by the pnpm lockfile. If it is
     # specified here then it won't be load bearing since the value in the pnpm
     # lockfile will take precedence.
-    srcs = [":lib", "package.json"]
+    srcs = [
+        "package.json",
+        ":lib",
+    ],
 )

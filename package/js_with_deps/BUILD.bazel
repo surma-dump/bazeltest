@@ -8,36 +8,40 @@ package(default_visibility = ["//visibility:public"])
 npm_link_all_packages(name = "node_modules")
 
 SRCS = ["main.jsx"]
+
 OUT = "bundle.js"
 
 esbuild(
-	name = "bundle",
-	config = {
-		"jsx": "transform",
-		"jsxFactory": "h",
-		"jsxFragment": "Fragment",
-		"format": "esm"
-	},
-	entry_point = "main.jsx",
-	output = OUT,
-	data = [
-		":node_modules/preact",
-	],
-	srcs = SRCS
+    name = "bundle",
+    srcs = SRCS,
+    config = {
+        "jsx": "transform",
+        "jsxFactory": "h",
+        "jsxFragment": "Fragment",
+        "format": "esm",
+    },
+    data = [
+        ":node_modules/preact",
+    ],
+    entry_point = "main.jsx",
+    output = OUT,
 )
 
 js_library(
     name = "lib",
     srcs = [
-        ":bundle"
+        ":bundle",
     ],
 )
 
 npm_package(
     name = "js_with_deps",
-     # The package name does not need to be specified in this target since the name
+    # The package name does not need to be specified in this target since the name
     # that this package is linked as is set by the pnpm lockfile. If it is
     # specified here then it won't be load bearing since the value in the pnpm
     # lockfile will take precedence.
-    srcs = [":lib", "package.json"],
+    srcs = [
+        "package.json",
+        ":lib",
+    ],
 )

@@ -12,18 +12,18 @@ SRCS = glob(["src/**"]) + [
 ]
 
 DEPS = [":node_modules/" + d for d in [
-        "@surma/js_with_deps",
-        "@surma/vanilla_js",
-        "@surma/ts",
-        "vite"
-    ]]
+    "@surma/js_with_deps",
+    "@surma/vanilla_js",
+    "@surma/ts",
+    "vite",
+]]
 
 vite_bin.vite(
     name = "app",
-    args = ["build"],
-    out_dirs = ["dist"],
-    chdir = package_name(),
     srcs = SRCS + DEPS,
+    args = ["build"],
+    chdir = package_name(),
+    out_dirs = ["dist"],
 )
 
 vite_bin.vite_binary(
@@ -31,4 +31,3 @@ vite_bin.vite_binary(
     chdir = package_name(),
     data = SRCS + DEPS,
 )
-

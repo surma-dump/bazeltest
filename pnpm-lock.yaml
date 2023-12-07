@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@bazel/bazelisk':
+        specifier: ^1.19.0
+        version: 1.19.0
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -30,25 +33,22 @@ importers:
         specifier: ^4.4.9
         version: 4.4.9
 
-  package/app_with_external_state:
-    dependencies:
-      vite:
-        specifier: ^4.4.9
-        version: 4.4.9
-
   package/js_with_deps:
     dependencies:
       preact:
         specifier: ^10.17.1
         version: 10.17.1
 
-  package/server: {}
-
   package/ts: {}
 
   package/vanilla_js: {}
 
 packages:
+
+  /@bazel/bazelisk@1.19.0:
+    resolution: {integrity: sha512-8PyRGRj/CN286IFHVILgYZ2lQ/JvgQ25ZEgoUAkpSnGmbPdQnKyHtTGEG+Sf0AISFqP5+PPzN162DcizZ/bR9w==}
+    hasBin: true
+    dev: false
 
   /@esbuild/android-arm64@0.18.20:
     resolution: {integrity: sha512-Nz4rJcchGDtENV0eMKUNa6L12zz2zBDXuhj/Vjh18zGqB44Bi7MBMSXjgunJgjRhCmKOjnPuZp4Mb6OKqtMHLQ==}
