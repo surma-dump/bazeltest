@@ -7,24 +7,15 @@ package(default_visibility = ["//visibility:public"])
 
 npm_link_all_packages(name = "node_modules")
 
-SRCS = ["main.jsx"]
-
-OUT = "bundle.js"
-
 esbuild(
     name = "bundle",
-    srcs = SRCS,
-    config = {
-        "jsx": "transform",
-        "jsxFactory": "h",
-        "jsxFragment": "Fragment",
-        "format": "esm",
-    },
+    srcs = glob(["**/*.jsx", "**/*.js"]),
+    config = "esbuild.config.mjs",
     data = [
         ":node_modules/preact",
     ],
     entry_point = "main.jsx",
-    output = OUT,
+    output = "bundle.js",
 )
 
 js_library(
