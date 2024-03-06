@@ -19,6 +19,14 @@ copy_to_bin(
 alias(
     name = "dev",
     actual = "//package/app:dev",
+    tags = [
+        # Found this one in the vite example[1], but can’t find documentation for it anywhere.
+        # It also doesn’t fix the problem.
+        # [1]: https://github.com/pziggo/bazel-examples/tree/main/ibazel
+
+        # "ibazel_live_reload",
+        "ibazel_notify_changes",
+    ],
 )
 
 filegroup(
