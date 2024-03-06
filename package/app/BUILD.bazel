@@ -16,6 +16,9 @@ DEPS = [":node_modules/" + d for d in [
     "@surma/vanilla_js",
     "@surma/ts",
     "vite",
+    "@vitejs/plugin-react",
+    "react",
+    "react-dom",
 ]]
 
 vite_bin.vite(

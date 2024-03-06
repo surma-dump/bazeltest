@@ -1,6 +1,6 @@
-import { shouldBe42 } from "@surma/vanilla_js";
-import { greet } from "@surma/ts";
 import "@surma/js_with_deps";
+import {App} from './app';
+import {createElement} from 'react';
+import {createRoot} from 'react-dom/client';
 
-document.body.append(greet("user who is using a TypeScript library"));
-document.body.append(`The result of a vanilla JS computation is: ${shouldBe42()}`);
+createRoot(document.body).render(createElement(App));

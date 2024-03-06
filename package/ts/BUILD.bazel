@@ -18,6 +18,7 @@ ts_project(
         swcrc = "//:swcrc",
     ),
     tsconfig = "//:ts_config",
+    allow_js = True,
 )
 
 npm_package(

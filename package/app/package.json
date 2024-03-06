@@ -8,7 +8,12 @@
 		"@surma/ts": "workspace:*",
 		"@surma/vanilla_js": "workspace:*",
 		"@surma/js_with_deps": "workspace:*",
-		"vite": "^4.4.9"
+		"vite": "^4.4.9",
+		"@vitejs/plugin-react": "^4.2.1",
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0",
+		"@types/react": "^18.2.63",
+		"@types/react-dom": "^18.2.20"
 	},
 	"keywords": [],
 	"author": "Surma <surma@surma.dev>",
