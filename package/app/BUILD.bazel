@@ -9,6 +9,7 @@ npm_link_all_packages(name = "node_modules")
 SRCS = glob(["src/**"]) + [
     "index.html",
     "vite.config.js",
+    "package.json",
 ]
 
 DEPS = [
