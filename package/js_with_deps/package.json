@@ -1,10 +1,10 @@
 {
-	"name": "@surma/js_with_deps",
-	"version": "0.0.1",
-	"description": "",
-	"type": "module",
-	"main": "bundle.js",
-	"keywords": [],
-	"author": "Surma <surma@surma.dev>",
-	"license": "Apache-2.0"
+  "name": "@surma/js_with_deps",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "bundle.js",
+  "keywords": [],
+  "author": "Surma <surma@surma.dev>",
+  "license": "Apache-2.0"
 }

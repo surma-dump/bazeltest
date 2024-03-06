@@ -16,7 +16,7 @@ esbuild(
     entry_point = "main.jsx",
     output = "bundle.js",
     external = ["react"],
-    format = "esm"
+    format = "esm",
 )
 
 js_library(

@@ -1,7 +1,7 @@
 ### Install dependencies
 
 ```sh
-pnpm 
+pnpm
 ```
 
 ### Build
@@ -17,7 +17,7 @@ npx bazel run :dev
 ```
 
 [ibazel](https://github.com/bazelbuild/bazel-watcher) is the file watcher that reruns tasks automatically.
+
 ```
 npx ibazel run :dev
 ```
-

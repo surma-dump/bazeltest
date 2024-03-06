@@ -1,10 +1,10 @@
 {
-	"name": "@surma/vanilla_js",
-	"version": "0.0.1",
-	"description": "",
-	"type": "module",
-	"main": "main.js",
-	"keywords": [],
-	"author": "Surma <surma@surma.dev>",
-	"license": "Apache-2.0"
+  "name": "@surma/vanilla_js",
+  "version": "0.0.1",
+  "description": "",
+  "type": "module",
+  "main": "main.js",
+  "keywords": [],
+  "author": "Surma <surma@surma.dev>",
+  "license": "Apache-2.0"
 }

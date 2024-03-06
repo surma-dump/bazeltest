@@ -17,8 +17,6 @@ DEPS = [
     ":node_modules",
 ]
 
-
-
 vite_bin.vite(
     name = "app",
     srcs = SRCS + DEPS,
