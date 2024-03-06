@@ -27,7 +27,12 @@ vite_bin.vite(
 )
 
 vite_bin.vite_binary(
+    name = "vite_dev",
+)
+
+js_run_devserver(
     name = "dev",
     chdir = package_name(),
     data = SRCS + DEPS,
+    tool = ":vite_dev",
 )
