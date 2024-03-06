@@ -16,7 +16,12 @@ copy_to_bin(
     srcs = [".swcrc"],
 )
 
-copy_to_bin(
-    name = "esbuild_graphql_plugin",
-    srcs = ["esbuild-graphql-plugin.mjs"]
+alias(
+    name = "dev",
+    actual = "//package/app:dev",
+)
+
+filegroup(
+    name = "app",
+    srcs = ["//package/app"],
 )

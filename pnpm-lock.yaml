@@ -11,6 +11,9 @@ importers:
       '@bazel/bazelisk':
         specifier: ^1.19.0
         version: 1.19.0
+      '@bazel/ibazel':
+        specifier: ^0.24.0
+        version: 0.24.0
       lodash-es:
         specifier: ^4.17.21
         version: 4.17.21
@@ -47,6 +50,11 @@ packages:
 
   /@bazel/bazelisk@1.19.0:
     resolution: {integrity: sha512-8PyRGRj/CN286IFHVILgYZ2lQ/JvgQ25ZEgoUAkpSnGmbPdQnKyHtTGEG+Sf0AISFqP5+PPzN162DcizZ/bR9w==}
+    hasBin: true
+    dev: false
+
+  /@bazel/ibazel@0.24.0:
+    resolution: {integrity: sha512-lA0Ey6iorssDTJDwBQW0bCmzQyBTAtOj7L4mqmmlFT6LhIzTc3r0iFOuzxFBsDq8NbxVs/W9PRNIsC/LfpI1nA==}
     hasBin: true
     dev: false
 

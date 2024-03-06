@@ -1,4 +1,3 @@
-import data from "./lol.graphql";
 import { render, h, Fragment } from "preact";
 import { useState } from "preact/hooks";
 
@@ -10,7 +9,6 @@ function App() {
 	return (
 		<>
 			<h1>Omg a counter</h1>
-			<span>{data}</span>
 			<div>Count {ctr}</div>
 			<button onClick={() => setCtr((i) => i + 1)}>Increment</button>
 		</>
