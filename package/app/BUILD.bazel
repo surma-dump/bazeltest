@@ -11,12 +11,13 @@ SRCS = glob(["src/**"]) + [
     "vite.config.js",
 ]
 
-DEPS = [":node_modules/" + d for d in [
-    "@surma/js_with_deps",
-    "@surma/vanilla_js",
-    "@surma/ts",
-    "vite",
-]]
+DEPS = [
+    "//:node_modules/react",
+    "//:node_modules/react-dom",
+    ":node_modules",
+]
+
+
 
 vite_bin.vite(
     name = "app",

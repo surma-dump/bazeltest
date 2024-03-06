@@ -1,18 +1,5 @@
-import { render, h, Fragment } from "preact";
-import { useState } from "preact/hooks";
+import * as React from "react";
 
-const div = document.createElement("div");
-document.body.append(div);
-
-function App() {
-	const [ctr, setCtr] = useState(0);
-	return (
-		<>
-			<h1>Omg a counter</h1>
-			<div>Count {ctr}</div>
-			<button onClick={() => setCtr((i) => i + 1)}>Increment</button>
-		</>
-	);
+export function ComponentOfDoom({children}) {
+	return <h1>{children}</h1>
 }
-
-render(<App />, div);

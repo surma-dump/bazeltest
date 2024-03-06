@@ -13,12 +13,10 @@ esbuild(
         "**/*.jsx",
         "**/*.js",
     ]),
-    config = "esbuild.config.mjs",
     entry_point = "main.jsx",
     output = "bundle.js",
-    deps = [
-        ":node_modules/preact",
-    ],
+    external = ["react"],
+    format = "esm"
 )
 
 js_library(
