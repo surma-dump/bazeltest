@@ -22,16 +22,18 @@ def npm_link_all_packages(
             ":package_json_bin",
             ":package_lock_json_bin",
             "//minimalist_rules_js:prepare_env",
+            # "//minimalist_rules_js:npmrc",
             "@nodejs_host//:npm",
         ],
         args = [
             "$(location //minimalist_rules_js:prepare_env)",
             "$${EXECROOT}/$(location @nodejs_host//:npm)",
+            "--cache=.cache",
             "ci",
         ],
         env = {
             "PACKAGE_NAME": native.package_name(),
-            "MARKER_OUT": "$(location :package_json_bin)",
+            "OUT_DIR_FILE": "$(location :package_json_bin)",
             "CHDIR": "$${PACKAGE_DIR}",
         },
         out_dirs = ["node_modules"],
@@ -68,7 +70,7 @@ def run_js_binary(
         ] + args,
         env = {
             "PACKAGE_NAME": native.package_name(),
-            "MARKER_OUT": "$(location :package_json_bin)",
+            "OUT_DIR_FILE": "$(location :package_json_bin)",
             "SYMLINKS": "$${EXECROOT}/$(location %s):$${EXECROOT}/$${PACKAGE_NAME}/node_modules" % node_modules,
         },
         tool = "@nodejs_host//:node",
