@@ -1,0 +1,7 @@
+{
+	"name": "@surma-dump/bazeltest/a_lib_with_workspace_deps",
+	"type": "module",
+	"devDependencies": {
+		"esbuild": "^0.21.3"
+	}
+}

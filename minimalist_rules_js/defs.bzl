@@ -73,12 +73,12 @@ def run_js_binary(
         ] if not is_npx else [
             "$${EXECROOT}/$(location %s)/.bin/%s" % (node_modules, tool),
         ]) + args,
-        env = {
+        env = env | {
             "PACKAGE_NAME": native.package_name(),
             "OUT_DIR_FILE": "$(location :package_json_bin)",
-            "SYMLINKS": "$${EXECROOT}/$(location %s):$${EXECROOT}/$${PACKAGE_NAME}/node_modules" % node_modules,
+            "SYMLINKS": ";".join(["$${EXECROOT}/$(location %s):$${EXECROOT}/$${PACKAGE_NAME}/node_modules" % node_modules, env.get("SYMLINKS", "")]),
             "IS_NPX": "%s" % is_npx,
-        } | env,
+        },
         tool = "@nodejs_host//:node",
         **kwargs
     )

@@ -1,6 +1,7 @@
 {
 	"name": "@surma-dump/bazeltest/a_lib",
 	"type": "module",
+	"main": "bundle.js",
 	"dependencies": {
 		"lodash-es": "^4.17.21"
 	},

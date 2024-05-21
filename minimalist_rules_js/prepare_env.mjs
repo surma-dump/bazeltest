@@ -25,7 +25,7 @@ const additionalEnv = {
 	PACKAGE_DIR,
 	OUT_DIR,
 	CHDIR,
-	BIN_DIR: PACKAGE_DIR.slice(0, -1 * PACKAGE_NAME.length),
+	BINDIR: PACKAGE_DIR.slice(0, -1 * PACKAGE_NAME.length),
 };
 // Expand all variables
 const newEnv = expandEnvVariables(
@@ -34,9 +34,11 @@ const newEnv = expandEnvVariables(
 
 if (newEnv.SYMLINKS) {
 	for (const symlink of newEnv.SYMLINKS.split(";")) {
+		if (symlink.trim().length <= 0) continue;
 		let [target, symlinkPath] = symlink
 			.split(":")
 			.map((p) => path.normalize(p));
+		fs.mkdirSync(path.dirname(symlinkPath), { recursive: true });
 		fs.symlinkSync(target, symlinkPath);
 	}
 }

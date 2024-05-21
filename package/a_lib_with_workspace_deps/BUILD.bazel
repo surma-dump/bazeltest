@@ -17,8 +17,12 @@ run_js_binary(
         "$${EXECROOT}/$(location :src/main.js)",
         "--outfile=$${EXECROOT}/$(location :bundle.js)",
     ],
+    data = [
+        "//package/a_lib",
+    ],
     env = {
         "CWD_FILE": "$${EXECROOT}/$(location :package.json)",
+        "SYMLINKS": "$${BINDIR}/package/a_lib:$${EXECROOT}/$(location :node_modules)/@surma/a_lib_with_workspace_deps",
     },
     is_npx = True,
     node_modules = ":node_modules",
@@ -26,10 +30,10 @@ run_js_binary(
 )
 
 filegroup(
-    name = "a_lib",
+    name = "a_lib_with_workspace_deps",
     srcs = [
+        "package.json",
         ":bundle",
-        ":package_json_bin",
     ],
     visibility = ["//visibility:public"],
 )
