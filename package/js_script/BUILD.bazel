@@ -5,9 +5,9 @@ npm_link_all_packages(
 )
 
 run_js_binary(
-    name = "app",
-    src = "src/main.js",
+    name = "js_script",
     outs = ["version.txt"],
     args = ["$${EXECROOT}/$(location :version.txt)"],
     node_modules = ":node_modules",
+    tool = "src/main.js",
 )

@@ -1,0 +1,10 @@
+{
+	"name": "@surma-dump/bazeltest/a_lib",
+	"type": "module",
+	"dependencies": {
+		"lodash-es": "^4.17.21"
+	},
+	"devDependencies": {
+		"esbuild": "^0.21.3"
+	}
+}

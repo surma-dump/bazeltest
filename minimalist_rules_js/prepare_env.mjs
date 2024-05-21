@@ -2,22 +2,29 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import { spawnSync } from "node:child_process";
 
-
 // Grab all values that we pass in via the defs.bzl file.
 // - PACKAGE_NAME is equivalent to `package_name()` in starlark
-// - OUT_DIR_FILE is the path of a file in the output folder, 
+// - OUT_DIR_FILE is the path of a file in the output folder,
 //   so we can derive the path of the output folder.
 // - EXECROOT is, well, the exec root.
-const { OUT_DIR_FILE, PACKAGE_NAME, EXECROOT = process.cwd() } = process.env;
+const {
+	CWD_FILE,
+	OUT_DIR_FILE,
+	PACKAGE_NAME,
+	EXECROOT = process.cwd(),
+} = process.env;
 const OUT_DIR = path.dirname(OUT_DIR_FILE);
 const PACKAGE_DIR = OUT_DIR_FILE.startsWith("/")
 	? OUT_DIR
 	: path.join(EXECROOT, OUT_DIR);
 
+const CHDIR = CWD_FILE ? path.dirname(CWD_FILE) : PACKAGE_DIR;
+
 const additionalEnv = {
 	EXECROOT,
 	PACKAGE_DIR,
 	OUT_DIR,
+	CHDIR,
 	BIN_DIR: PACKAGE_DIR.slice(0, -1 * PACKAGE_NAME.length),
 };
 // Expand all variables
@@ -34,7 +41,7 @@ if (newEnv.SYMLINKS) {
 	}
 }
 
-const [cmd, ...args] = process.argv
+let [cmd, ...args] = process.argv
 	.slice(2)
 	.map((arg) => expandVariables(arg, newEnv));
 
@@ -53,14 +60,14 @@ process.exit(result.status);
  * @returns {string}
  */
 function expandVariables(str, vars) {
-const VAR_REGEXP = /\$\{([^}]+)\}/g;
+	const VAR_REGEXP = /\$\{([^}]+)\}/g;
 	return str.replace(VAR_REGEXP, (_match, varName) => {
 		return vars[varName] ?? "";
 	});
 }
 
 /**
- * Expand all variable expressions in the values of the provided dictionary, 
+ * Expand all variable expressions in the values of the provided dictionary,
  * using the dictionary itself for values.
  * @param {Record<string, string>} env
  * @returns {Record<string, string>}

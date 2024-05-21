@@ -43,9 +43,11 @@ def npm_link_all_packages(
 
 def run_js_binary(
         name,
-        src,
+        tool,
         outs,
         node_modules,
+        is_npx = False,
+        srcs = [],
         data = [],
         args = [],
         env = {},
@@ -60,19 +62,23 @@ def run_js_binary(
             "//minimalist_rules_js:prepare_env",
             ":package_json_bin",
             "@nodejs_host//:node",
-        ] + data + [src],
+        ] + data + srcs + ([tool] if not is_npx else []),
         outs = outs,
         args = [
             "$(location //minimalist_rules_js:prepare_env)",
+        ] + ([
             "$${EXECROOT}/$(location @nodejs_host//:node)",
             "--preserve-symlinks-main",
-            "$${EXECROOT}/$(location %s)" % src,
-        ] + args,
+            "$${EXECROOT}/$(location %s)" % tool,
+        ] if not is_npx else [
+            "$${EXECROOT}/$(location %s)/.bin/%s" % (node_modules, tool),
+        ]) + args,
         env = {
             "PACKAGE_NAME": native.package_name(),
             "OUT_DIR_FILE": "$(location :package_json_bin)",
             "SYMLINKS": "$${EXECROOT}/$(location %s):$${EXECROOT}/$${PACKAGE_NAME}/node_modules" % node_modules,
-        },
+            "IS_NPX": "%s" % is_npx,
+        } | env,
         tool = "@nodejs_host//:node",
         **kwargs
     )

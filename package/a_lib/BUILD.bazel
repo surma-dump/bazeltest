@@ -1,0 +1,24 @@
+load("//minimalist_rules_js:defs.bzl", "npm_link_all_packages", "run_js_binary")
+
+npm_link_all_packages(
+    name = "node_modules",
+)
+
+run_js_binary(
+    name = "a_lib",
+    srcs = [
+        "src/main.js",
+    ],
+    outs = ["bundle.js"],
+    args = [
+        "--bundle",
+        "$${EXECROOT}/$(location :src/main.js)",
+        "--outfile=$${EXECROOT}/$(location :bundle.js)",
+    ],
+    env = {
+        "CWD_FILE": "$${EXECROOT}/$(location :package.json)",
+    },
+    is_npx = True,
+    node_modules = ":node_modules",
+    tool = "esbuild",
+)

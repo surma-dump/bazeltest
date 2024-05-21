@@ -7,8 +7,8 @@ fs.writeFileSync(
 	args[0],
 	JSON.stringify(
 		{
-			v: process.version,
-			c: preact.Component.name,
+			node_version: process.version,
+			preact_component: preact.Component.name,
 		},
 		null,
 		2,
