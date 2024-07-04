@@ -1,7 +1,9 @@
+let pkgs = import <nixpkgs> {}; in
 derivation {
   name = "lol";
   system = builtins.currentSystem;
   builder = "/bin/sh";
-  args = ["-c" "echo lol > $out" ];
-   
+  src = ./input.txt;
+  args = ["-c" "(${pkgs.coreutils}/bin/cat $src; echo '!') > $out" ];
 }
+
