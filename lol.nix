@@ -3,7 +3,7 @@ derivation {
   name = "lol";
   system = builtins.currentSystem;
   builder = "/bin/sh";
-  src = ./input.txt;
-  args = ["-c" "(${pkgs.coreutils}/bin/cat $src; echo '!') > $out" ];
+  srcs = [./input.txt ./input2.txt];
+  args = ["-c" "(${pkgs.coreutils}/bin/cat $srcs; echo '!') > $out" ];
 }
 
