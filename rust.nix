@@ -1,29 +1,22 @@
 { 
-  # pkgs ? import <nixpkgs> {},
-  pkgs ? import /Users/surma/src/github.com/NixOS/nixpkgs {},
+  pkgs ? import <nixpkgs> {},
+  # pkgs ? import /Users/surma/src/github.com/NixOS/nixpkgs {},
 }:
 let 
-  # rustPlatform = pkgs.pkgsCross.wasm32-unknown-none.rustPlatform;
-  pkgs' = pkgs.pkgsCross.wasi32;
-  fenixRepo = { 
-    owner = "nix-community"; 
-    repo = "fenix"; 
-    rev = "f6994934e25396d3a70ddb908cefccd8d3c37ac4"; 
-    hash="sha256-GPl5qug68zcCBvkakakTdzuA/LIOdWyJbAjXkoeM+FE=";
-  };
-  fenixFactory = import(pkgs.fetchFromGitHub fenixRepo);
-  fenix = pkgs.callPackage fenixFactory {};
-  crateToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
-  rustPlatform = with fenix.targets.wasm32-unknown-unknown.stable; pkgs.makeRustPlatform {
-    rustc = completeToolchain;
-    # cargo = pkgs.cargo;
-    cargo = completeToolchain;
+  fenix = import ./fenix.nix {inherit pkgs;};
+  naersk-lib = import ./naersk.nix {inherit pkgs;};
+  toolchain =  fenix.combine [
+    fenix.stable.rustc
+    fenix.stable.cargo
+    fenix.targets.wasm32-wasi.stable.rust-std
+  ];
+  naersk = pkgs.callPackage naersk-lib {
+    rustc = toolchain;
+    cargo = toolchain;
   };
 in 
-rustPlatform.buildRustPackage {
+naersk.buildPackage {
   name = "lol";
   src = ./.;
-  cargoLock = {
-    lockFile = ./Cargo.lock;
-  };
+  CARGO_BUILD_TARGET = "wasm32-wasi";
 }
