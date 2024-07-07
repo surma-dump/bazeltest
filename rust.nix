@@ -11,18 +11,17 @@ let
     fenix.stable.cargo
     (builtins.getAttr target fenix.targets).stable.rust-std
   ];
-  src = ./.;
 in 
-derivation {
-  inherit src;
+pkgs.stdenv.mkDerivation {
   name = "lol";
-  system = builtins.currentSystem;
-  builder = "${pkgs.bash}/bin/bash";
-  args = ["-c" ''
-    export PATH=$PATH:${pkgs.coreutils}/bin:${toolchain}/bin
-    cp -r ${src}/. .
-    cargo build -r --target ${target}
-    mkdir -p $out/bin
-    cp target/${target}/release/lol.wasm $out/bin
-  ''];
+  src = ./.;
+  buildInputs = [toolchain pkgs.jq];
+  buildPhase = ''
+    cargo build -r --target ${target} --message-format=json > log.json
+  '';
+  installPhase = ''
+    mkdir -p $out/bin;
+    FILE=$(cat log.json | jq -rs '.[0].executable')
+    cp $FILE $out/bin
+  '';
 }
