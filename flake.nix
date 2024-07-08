@@ -1,15 +1,15 @@
 {
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    wasm-module.url = "path:./rust";
+    rust-js-wrapper.url = "path:./rust-js-wrapper";
   };
 
-  outputs = { self, nixpkgs, flake-utils, wasm-module }:
+  outputs = { self, nixpkgs, flake-utils, rust-js-wrapper }:
     let
       project = {
         name = "app";
         srcs = nixpkgs.lib.cleanSource ./.;
-        npmDepsHash = "sha256-tsdjASgej7CG+9+v4zyK26POJCMyMt96sFS7iPTEu1c=";
+        npmDepsHash = "sha256-6lkXLj5+z7mZwtgbit/fzQ+LDsRXnj787yY8wjWNrxI=";
       };
     in flake-utils.lib.eachDefaultSystem (system:
       let
@@ -17,11 +17,9 @@
         lib = pkgs.lib;
       in {
         packages.default = pkgs.buildNpmPackage (project // {
-          buildInputs = [ wasm-module.packages.${system}.default ];
+          nativeBuildInputs = [ rust-js-wrapper.packages.${system}.default ];
         });
-        devShells.default = let
-          dev-server =
-            pkgs.buildNpmPackage (project // { npmBuildScript = "dev"; });
-        in pkgs.mkShell { buildInputs = [ dev-server ]; };
+        devShells.default = let dev-server = 0;
+        in pkgs.mkShell { buildInputs = [ self.packages.${system}.default ]; };
       });
 }

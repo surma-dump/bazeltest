@@ -6,10 +6,12 @@
 
   outputs = { self, nixpkgs, flake-utils, wasm-module }:
     let
+      name = "rust-js-wrapper";
       project = {
-        name = "rust-js-wrapper";
-        srcs = nixpkgs.lib.cleanSource ./.;
-        npmDepsHash = "sha256-tsdjASgej7CG+9+v4zyK26POJCMyMt96sFS7iPTEu1c=";
+        inherit name;
+        srcs = ./..;
+        npmDepsHash = "sha256-6lkXLj5+z7mZwtgbit/fzQ+LDsRXnj787yY8wjWNrxI=";
+        npmWorkspace = name;
       };
     in flake-utils.lib.eachDefaultSystem (system:
       let
@@ -18,6 +20,7 @@
       in {
         packages.default = pkgs.buildNpmPackage (project // {
           buildInputs = [ wasm-module.packages.${system}.default ];
+          npmBuildFlags = [ wasm-module.packages.${system}.default ];
         });
       });
 }

@@ -1,7 +1,14 @@
 {
   "name": "rust-js-wrapper",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": ""
+    "build": "node ./build.js"
+  },
+  "files": [
+    "lol.wasm"
+  ],
+  "devDependencies": {
+    "vite": "^5.3.3"
   }
 }
