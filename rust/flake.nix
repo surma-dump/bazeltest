@@ -1,8 +1,5 @@
 {
-  description = "Example Rust flake";
-
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/24.05";
     flake-utils.url = "github:numtide/flake-utils";
     fenix.url = "github:nix-community/fenix";
     naersk.url = "github:nix-community/naersk";

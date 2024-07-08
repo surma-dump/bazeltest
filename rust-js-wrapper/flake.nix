@@ -1,13 +1,13 @@
 {
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    wasm-module.url = "path:./rust";
+    wasm-module.url = "path:../rust";
   };
 
   outputs = { self, nixpkgs, flake-utils, wasm-module }:
     let
       project = {
-        name = "app";
+        name = "rust-js-wrapper";
         srcs = nixpkgs.lib.cleanSource ./.;
         npmDepsHash = "sha256-tsdjASgej7CG+9+v4zyK26POJCMyMt96sFS7iPTEu1c=";
       };
@@ -19,9 +19,5 @@
         packages.default = pkgs.buildNpmPackage (project // {
           buildInputs = [ wasm-module.packages.${system}.default ];
         });
-        devShells.default = let
-          dev-server =
-            pkgs.buildNpmPackage (project // { npmBuildScript = "dev"; });
-        in pkgs.mkShell { buildInputs = [ dev-server ]; };
       });
 }
