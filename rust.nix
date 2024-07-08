@@ -3,25 +3,26 @@
   # pkgs ? import /Users/surma/src/github.com/NixOS/nixpkgs {},
 }:
 let 
-  # target = "wasm32-unknown-unknown";
-  target = "wasm32-wasi";
+  target = "wasm32-unknown-unknown";
+  # target = "wasm32-wasi";
   fenix = import ./fenix.nix {inherit pkgs;};
   toolchain =  fenix.combine [
     fenix.stable.rustc
     fenix.stable.cargo
     (builtins.getAttr target fenix.targets).stable.rust-std
   ];
+  lib = pkgs.lib;
 in 
 pkgs.stdenv.mkDerivation {
   name = "lol";
-  src = ./.;
+  src = lib.cleanSource ./.;
   buildInputs = [toolchain pkgs.jq];
   buildPhase = ''
     cargo build -r --target ${target} --message-format=json > log.json
   '';
   installPhase = ''
     mkdir -p $out/bin;
-    FILE=$(cat log.json | jq -rs '.[0].executable')
+    FILE=$(cat log.json | jq -rs '.[0].filenames[0]')
     cp $FILE $out/bin
   '';
 }
