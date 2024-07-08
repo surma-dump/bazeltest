@@ -1,10 +1,10 @@
 {
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
-    rust-js-wrapper.url = "path:./rust-js-wrapper";
+    wasm-module.url = "path:./rust";
   };
 
-  outputs = { self, nixpkgs, flake-utils, rust-js-wrapper }:
+  outputs = { self, nixpkgs, flake-utils, wasm-module }:
     let
       project = {
         name = "app";
@@ -15,11 +15,22 @@
       let
         pkgs = import nixpkgs { inherit system; };
         lib = pkgs.lib;
+        systemProject = project // {
+          buildInputs = [ self.packages.${system}.rust-js-wrapper ];
+        };
       in {
-        packages.default = pkgs.buildNpmPackage (project // {
-          nativeBuildInputs = [ rust-js-wrapper.packages.${system}.default ];
+        packages.rust-js-wrapper = pkgs.buildNpmPackage (project // {
+          npmWorkspace = "rust-js-wrapper";
+          buildInputs = [ wasm-module.packages.${system}.default ];
+          npmBuildFlags = [ wasm-module.packages.${system}.default ];
         });
+
+        packages.default = pkgs.buildNpmPackage systemProject;
+
         devShells.default = let dev-server = 0;
-        in pkgs.mkShell { buildInputs = [ self.packages.${system}.default ]; };
+        in pkgs.mkShell {
+          buildInputs = systemProject.buildInputs;
+          shellHook = "npm run dev";
+        };
       });
 }
