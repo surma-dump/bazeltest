@@ -6,23 +6,22 @@ let
   target = "wasm32-unknown-unknown";
   # target = "wasm32-wasi";
   fenix = import ./fenix.nix {inherit pkgs;};
+  naersk-lib = import ./naersk.nix {inherit pkgs;};
   toolchain =  fenix.combine [
     fenix.stable.rustc
     fenix.stable.cargo
     (builtins.getAttr target fenix.targets).stable.rust-std
   ];
+  naersk = pkgs.callPackage naersk-lib {
+    rustc = toolchain;
+    cargo = toolchain;
+  };
   lib = pkgs.lib;
 in 
-pkgs.stdenv.mkDerivation {
+naersk.buildPackage {
   name = "lol";
   src = lib.cleanSource ./.;
-  buildInputs = [toolchain pkgs.jq];
-  buildPhase = ''
-    cargo build -r --target ${target} --message-format=json > log.json
-  '';
-  installPhase = ''
-    mkdir -p $out/bin;
-    FILE=$(cat log.json | jq -rs '.[0].filenames[0]')
-    cp $FILE $out/bin
-  '';
+  release = true;
+  copyLibs = true;
+  CARGO_BUILD_TARGET = target;
 }
