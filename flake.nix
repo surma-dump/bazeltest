@@ -4,9 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/24.05";
     flake-utils.url = "github:numtide/flake-utils";
+    wasm-module.url = "path:./rust";
   };
 
-  outputs = { self, nixpkgs, flake-utils }:
+  outputs = { self, nixpkgs, flake-utils, wasm-module }:
     let
       project = {
         name = "app";
@@ -18,7 +19,9 @@
         pkgs = import nixpkgs { inherit system; };
         lib = pkgs.lib;
       in {
-        packages.default = pkgs.buildNpmPackage project;
+        packages.default = pkgs.buildNpmPackage (project // {
+          buildInputs = [ wasm-module.packages.${system}.default ];
+        });
         devShells.default = let
           dev-server =
             pkgs.buildNpmPackage (project // { npmBuildScript = "dev"; });
