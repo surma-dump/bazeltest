@@ -1,5 +1,5 @@
 {
-  "name": "js",
+  "name": "app",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
@@ -7,12 +7,9 @@
     "build": "vite build"
   },
   "dependencies": {
-    "rust-js-wrapper": "*"
+    "rust-js-wrapper": "./rust-js-wrapper"
   },
   "devDependencies": {
     "vite": "^5.3.3"
-  },
-  "workspaces": [
-    "./rust-js-wrapper"
-  ]
+  }
 }

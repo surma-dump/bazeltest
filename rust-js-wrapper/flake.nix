@@ -5,22 +5,18 @@
   };
 
   outputs = { self, nixpkgs, flake-utils, wasm-module }:
-    let
-      name = "rust-js-wrapper";
-      project = {
-        inherit name;
-        srcs = ./..;
-        npmDepsHash = "sha256-6lkXLj5+z7mZwtgbit/fzQ+LDsRXnj787yY8wjWNrxI=";
-        npmWorkspace = name;
-      };
-    in flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs { inherit system; };
-        lib = pkgs.lib;
+    flake-utils.lib.eachDefaultSystem (system:
+      let pkgs = import nixpkgs { inherit system; };
       in {
-        packages.default = pkgs.buildNpmPackage (project // {
+        packages.default = pkgs.buildNpmPackage {
+          name = "rust-js-wrapper";
+          srcs = ./.;
+          npmDepsHash = "sha256-9UcGChPV7OtSSOTDsdcsruV+zVp27YaiSldCgQLdG5w=";
           buildInputs = [ wasm-module.packages.${system}.default ];
           npmBuildFlags = [ wasm-module.packages.${system}.default ];
-        });
+          postPatch = ''
+            cp ${./package-lock.json} package-lock.json
+          '';
+        };
       });
 }
