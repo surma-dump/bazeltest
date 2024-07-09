@@ -14,7 +14,6 @@
     in flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        lib = pkgs.lib;
         systemProject = project // {
           buildInputs = [ self.packages.${system}.rust-js-wrapper ];
         };
@@ -26,11 +25,5 @@
         });
 
         packages.default = pkgs.buildNpmPackage systemProject;
-
-        devShells.default = let dev-server = 0;
-        in pkgs.mkShell {
-          buildInputs = systemProject.buildInputs;
-          shellHook = "npm run dev";
-        };
       });
 }
