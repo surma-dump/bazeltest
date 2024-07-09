@@ -19,6 +19,7 @@
         };
       in {
         packages.rust-js-wrapper = pkgs.buildNpmPackage (project // {
+          name = "rust-js-wrapper";
           npmWorkspace = "rust-js-wrapper";
           buildInputs = [ wasm-module.packages.${system}.default ];
           npmBuildFlags = [ wasm-module.packages.${system}.default ];
