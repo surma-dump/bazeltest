@@ -1,22 +1,20 @@
 {
-  inputs = {
-    flake-utils.url = "github:numtide/flake-utils";
-    rust-js-wrapper.url = "path:./rust-js-wrapper";
-  };
+  inputs = { flake-utils.url = "github:numtide/flake-utils"; };
 
   outputs = { self, nixpkgs, flake-utils, rust-js-wrapper }:
     flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = import nixpkgs { inherit system; };
-        systemProject = {
-
+        gitignore = pkgs.lib.readFile ./.gitignore;
+      in with pkgs; {
+        packages.default = buildNpmPackage {
           name = "app";
-          srcs = nixpkgs.lib.cleanSource ./.;
-          npmDepsHash = "sha256-1iilvUGUzfy9QzjzXa1rIoKY+wtbF21y1VgIS/8Xu8M=";
-          buildInputs = [ rust-js-wrapper.packages.${system}.default ];
+          src = lib.cleanSourceWith {
+            src = ./.;
+            filter = nix-gitignore.gitignoreFilter gitignore "${./.}";
+          };
+          npmDeps = importNpmLock { npmRoot = ./.; };
+          npmConfigHook = importNpmLock.npmConfigHook;
         };
-      in {
-
-        packages.default = pkgs.buildNpmPackage systemProject;
       });
 }

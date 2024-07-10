@@ -1,5 +1,3 @@
-import rawWasm from "rust-js-wrapper/lol.wasm?url";
+import greeting from "other-package/greeting.js";
 
-const { instance } = await WebAssembly.instantiateStreaming(fetch(rawWasm), {});
-
-console.log(`Hi! ${instance.exports.math(40, 2)}`);
+console.log(greeting("World"));

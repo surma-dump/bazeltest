@@ -195,12 +195,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-+u+pa4mrf1LHKybTmP29txdRTRJc78lDgw0/DaWprYA=",
-        "path": "./rust-js-wrapper",
+        "narHash": "sha256-BwinFy3/prMhWa0fiyZHwezick03nHKH01gYnvBHg3Q=",
+        "path": "rust-js-wrapper",
         "type": "path"
       },
       "original": {
-        "path": "./rust-js-wrapper",
+        "path": "rust-js-wrapper",
         "type": "path"
       }
     },

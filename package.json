@@ -6,8 +6,11 @@
     "dev": "vite",
     "build": "vite build"
   },
+  "workspaces": [
+    "./other-package"
+  ],
   "dependencies": {
-    "rust-js-wrapper": "./rust-js-wrapper"
+    "other-package": "*"
   },
   "devDependencies": {
     "vite": "^5.3.3"
